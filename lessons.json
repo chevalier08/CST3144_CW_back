@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "subject": "Math",
+    "location": "London",
+    "price": 100,
+    "spaces": 5,
+    "icon": "fa-solid fa-calculator"
+  },
+  {
+    "id": 2,
+    "subject": "Physics",
+    "location": "Manchester",
+    "price": 120,
+    "spaces": 5,
+    "icon": "fa-solid fa-atom"
+  },
+  {
+    "id": 3,
+    "subject": "English",
+    "location": "London",
+    "price": 90,
+    "spaces": 5,
+    "icon": "fa-solid fa-book"
+  },
+  {
+    "id": 4,
+    "subject": "Biology",
+    "location": "Oxford",
+    "price": 110,
+    "spaces": 5,
+    "icon": "fa-solid fa-dna"
+  },
+  {
+    "id": 5,
+    "subject": "Chemistry",
+    "location": "Cambridge",
+    "price": 115,
+    "spaces": 5,
+    "icon": "fa-solid fa-flask"
+  },
+  {
+    "id": 6,
+    "subject": "History",
+    "location": "Liverpool",
+    "price": 95,
+    "spaces": 5,
+    "icon": "fa-solid fa-landmark"
+  },
+  {
+    "id": 7,
+    "subject": "Geography",
+    "location": "Bristol",
+    "price": 100,
+    "spaces": 5,
+    "icon": "fa-solid fa-globe"
+  },
+  {
+    "id": 8,
+    "subject": "Art",
+    "location": "London",
+    "price": 130,
+    "spaces": 5,
+    "icon": "fa-solid fa-paint-brush"
+  },
+  {
+    "id": 9,
+    "subject": "Music",
+    "location": "Manchester",
+    "price": 120,
+    "spaces": 5,
+    "icon": "fa-solid fa-music"
+  },
+  {
+    "id": 10,
+    "subject": "Computer Science",
+    "location": "Oxford",
+    "price": 150,
+    "spaces": 5,
+    "icon": "fa-solid fa-laptop-code"
+  }
+]
+
