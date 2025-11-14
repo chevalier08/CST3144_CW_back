@@ -44,6 +44,24 @@ app.get('/lessons', async (req, res, next) => {
   }
 });
 
+app.post('/orders', async (req, res) => {
+  try {
+    const ordersCollection = db.collection("orders");
+    console.log("POST request to collection:", req.params.collectionName);
+    console.log("Order data:", req.body);
+
+    const result = await ordersCollection.insertOne(req.body);
+
+    res.json({
+      message: "Order saved successfully",
+      insertedId: result.insertedId
+    });
+
+  } catch (err) {
+    console.error("Error inserting document:", err.message);
+    res.status(500).json({ error: "Failed to insert document" });
+  }
+});
 
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
