@@ -44,6 +44,7 @@ app.get('/lessons', async (req, res, next) => {
   }
 });
 
+// POST /orders
 app.post('/orders', async (req, res) => {
   try {
     const ordersCollection = db.collection("orders");
@@ -61,6 +62,23 @@ app.post('/orders', async (req, res) => {
     console.error("Error inserting document:", err.message);
     res.status(500).json({ error: "Failed to insert document" });
   }
+});
+
+// PUT /lessons/:id
+app.put('/lessons/:id', async (req, res) => {
+    const lessonId = req.params.id;
+    const updateData = req.body;  
+
+    try {
+        const result = await db.collection('lessons').updateOne(
+            { _id: new ObjectId(lessonId) }, 
+            { $set: updateData }
+        );
+
+        res.status(200).json({ message: "Lesson updated", result });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 app.listen(3000, () => {
