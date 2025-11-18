@@ -105,7 +105,7 @@ app.get('/search', async (req, res) => {
 
     const results = await lessonsCollection.find({
       $or: [
-        { title: searchRegex },
+        { subject: searchRegex },
         { location: searchRegex },
         { price: searchRegex },
         { spaces: searchRegex }
