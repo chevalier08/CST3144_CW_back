@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const fs = require("fs");
 
 const app = express();
 app.use(cors());
@@ -32,6 +33,17 @@ async function connectDB() {
 }
 
 connectDB();
+
+app.get('/images/:img', (req, res) => {
+  const filePath = path.join(__dirname, 'images', req.params.img);
+
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).json({ message: "Image file does not exist" });
+  }
+});
+
 
 // GET /lessons
 app.get('/lessons', async (req, res, next) => {
