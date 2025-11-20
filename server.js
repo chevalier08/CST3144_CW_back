@@ -93,31 +93,53 @@ app.put('/lessons/:id', async (req, res) => {
     }
 });
 
-// GET /search
 app.get('/search', async (req, res) => {
-  const query = req.query.query || "";
+  const q = (req.query.query || "").trim();
+  const regex = new RegExp(q, "i");
+
+  const num = Number(q);
+  const isNum = !isNaN(num);
 
   try {
-    const lessonsCollection = db.collection("lessons");
-
-    // case-insensitive regex
-    const searchRegex = new RegExp(query, "i");
-
-    const results = await lessonsCollection.find({
+    const results = await db.collection("lessons").find({
       $or: [
-        { subject: searchRegex },
-        { location: searchRegex },
-        { price: searchRegex },
-        { spaces: searchRegex }
+        { subject: regex },
+        { location: regex },
+        ...(isNum ? [{ price: num }, { spaces: num }] : [])
       ]
     }).toArray();
 
-    res.status(200).json(results);
+    res.json(results);
   } catch (err) {
-    console.error("Search error:", err);
-    res.status(500).json({ error: "Failed to search lessons" });
+    res.status(500).json({ error: "Search failed" });
   }
 });
+
+// GET /search
+// app.get('/search', async (req, res) => {
+//   const query = req.query.query || "";
+
+//   try {
+//     const lessonsCollection = db.collection("lessons");
+
+//     // case-insensitive regex
+//     const searchRegex = new RegExp(query, "i");
+
+//     const results = await lessonsCollection.find({
+//       $or: [
+//         { subject: searchRegex },
+//         { location: searchRegex },
+//         { price: searchRegex },
+//         { spaces: searchRegex }
+//       ]
+//     }).toArray();
+
+//     res.status(200).json(results);
+//   } catch (err) {
+//     console.error("Search error:", err);
+//     res.status(500).json({ error: "Failed to search lessons" });
+//   }
+// });
 
 
 app.listen(3000, () => {
