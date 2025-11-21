@@ -115,32 +115,6 @@ app.get('/search', async (req, res) => {
   }
 });
 
-// GET /search
-// app.get('/search', async (req, res) => {
-//   const query = req.query.query || "";
-
-//   try {
-//     const lessonsCollection = db.collection("lessons");
-
-//     // case-insensitive regex
-//     const searchRegex = new RegExp(query, "i");
-
-//     const results = await lessonsCollection.find({
-//       $or: [
-//         { subject: searchRegex },
-//         { location: searchRegex },
-//         { price: searchRegex },
-//         { spaces: searchRegex }
-//       ]
-//     }).toArray();
-
-//     res.status(200).json(results);
-//   } catch (err) {
-//     console.error("Search error:", err);
-//     res.status(500).json({ error: "Failed to search lessons" });
-//   }
-// });
-
 
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
