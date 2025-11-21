@@ -6,13 +6,13 @@ const fs = require("fs");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
+app.use(morgan('dev')); //"logger" middleware
 
 const { MongoClient, ObjectId, ServerApiVersion } = require("mongodb");
 const path = require("path");
 const PropertiesReader = require("properties-reader");
 
-// Load properties from dbconnection.properties
+//Load properties from dbconnection.properties
 const propertiesPath = path.resolve(__dirname, "./dbconnection.properties");
 const properties = PropertiesReader(propertiesPath);
 
@@ -20,8 +20,9 @@ const uri = `${properties.get("db.prefix")}${properties.get("db.user")}:${proper
 
 const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 
-let db; // database reference
+let db; //Database reference
 
+//Connect to MongoDB
 async function connectDB() {
   try {
     await client.connect();
@@ -34,6 +35,7 @@ async function connectDB() {
 
 connectDB();
 
+//Static middleware returning lessons images for demonstration purposes
 app.get('/images/:img', (req, res) => {
   const filePath = path.join(__dirname, 'images', req.params.img);
 
@@ -93,6 +95,7 @@ app.put('/lessons/:id', async (req, res) => {
     }
 });
 
+//Search functionality
 app.get('/search', async (req, res) => {
   const q = (req.query.query || "").trim();
   const regex = new RegExp(q, "i");
@@ -116,8 +119,10 @@ app.get('/search', async (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 
