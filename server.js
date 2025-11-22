@@ -27,7 +27,14 @@ async function connectDB() {
   try {
     await client.connect();
     console.log("Connected to MongoDB");
+
     db = client.db(properties.get("db.name"));
+
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+
   } catch (err) {
     console.error("MongoDB connection error:", err);
   }
