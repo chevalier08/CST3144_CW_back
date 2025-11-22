@@ -69,7 +69,6 @@ app.get('/lessons', async (req, res, next) => {
 app.post('/orders', async (req, res) => {
   try {
     const ordersCollection = db.collection("orders");
-    console.log("POST request to collection:", req.params.collectionName);
     console.log("Order data:", req.body);
 
     const result = await ordersCollection.insertOne(req.body);
